@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState, useCallback } from 'react';
 import ProductCard from './ProductCard';
-import styles from '../home/styles.module.css';
+import styles from '@/app/home/styles.module.css';
 import type { IProduct } from '@/models/Product';
 
 const VISIBLE_CARDS = 5;

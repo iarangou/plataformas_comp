@@ -1,7 +1,6 @@
 import { connectToDB } from '@/lib/db';
 import { Product } from '@/models/Product';
-import HomeChrome from '@/app/_components/HomeChrome';
-import Shelf from '@/app/_components/Shelf';
+import Shelf from '@/app/_modules/product/Shelf';
 import styles from './styles.module.css';
 
 export const revalidate = 0;
@@ -19,7 +18,7 @@ export default async function HomePage() {
 
   return (
     <div className={styles.page}>
-      <HomeChrome>
+      
         <main className={styles.main}>
           <Shelf title="TOP SALE" products={JSON.parse(JSON.stringify(topSale))} />
           <Shelf title="Sugeridos" products={JSON.parse(JSON.stringify(suggested))} />
@@ -27,7 +26,7 @@ export default async function HomePage() {
             <Shelf key={cat} title={cat} products={JSON.parse(JSON.stringify(items))} />
           ))}
         </main>
-      </HomeChrome>
+      
     </div>
   );
 }

@@ -1,15 +1,17 @@
 'use client';
 
 import Image from 'next/image';
-import styles from '@/app/home/cart.module.css';
+import styles from './cart.module.css';
 import { formatCOP } from '@/lib/currency';
+import type { CartItem } from './cart.types';
 
-export type CartItem = {
-  _id: string;
-  name: string;
-  price: number;
-  image?: string;
-  qty: number;
+type CartDrawerProps = {
+  open: boolean;
+  onClose: () => void;
+  items: CartItem[];
+  onInc: (id: string) => void;
+  onDec: (id: string) => void;
+  onCheckout: () => void;
 };
 
 export default function CartDrawer({
@@ -19,14 +21,7 @@ export default function CartDrawer({
   onInc,
   onDec,
   onCheckout,
-}: {
-  open: boolean;
-  onClose: () => void;
-  items: CartItem[];
-  onInc: (id: string) => void;
-  onDec: (id: string) => void;
-  onCheckout: () => void;
-}) {
+}: CartDrawerProps) {
   const count = items.reduce((a, b) => a + b.qty, 0);
   const total = items.reduce((a, b) => a + b.qty * b.price, 0);
 
@@ -42,7 +37,6 @@ export default function CartDrawer({
         aria-label="Carrito"
         aria-hidden={!open}
       >
-        {/* Top azul oscuro con icono y badge */}
         <div className={styles.top}>
           <div className={styles.cartIconWrap}>
             <Image src="/buyingCart.svg" alt="Carrito" width={28} height={28} />
@@ -50,7 +44,6 @@ export default function CartDrawer({
           </div>
         </div>
 
-        {/* Contenido */}
         <div className={styles.body}>
           {items.length === 0 ? (
             <div className={styles.empty}>Carrito vacío</div>
@@ -100,7 +93,6 @@ export default function CartDrawer({
           )}
         </div>
 
-        {/* Footer total + checkout */}
         <div className={styles.footer}>
           <div className={styles.totalLine}>
             <span className={styles.totalLabel}>TOTAL</span>

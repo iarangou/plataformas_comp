@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import styles from '../home/styles.module.css';
+import styles from '@/app/home/styles.module.css';
 
 export default function Header({
   cartCount = 0,

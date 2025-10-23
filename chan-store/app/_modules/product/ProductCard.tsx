@@ -1,7 +1,8 @@
 'use client';
-import styles from '../home/styles.module.css';
+import styles from '@/app/home/styles.module.css';
 import { formatCOP } from '@/lib/currency';
-import { useCartActions } from './CartActionsContext';
+import { useCartActions } from '@/app/_modules/cart/CartProvider';
+import type { AddToCartInput } from '@/app/_modules/cart/cart.types';
 
 type Props = {
   id: string;
@@ -16,7 +17,8 @@ export default function ProductCard({ id, name, price, image }: Props) {
 
   const handleAdd = () => {
     if (typeof price !== 'number') return;
-    add({ _id: id, name, price, image });
+    const payload: AddToCartInput = { _id: id, name, price, image };
+    add(payload);
   };
 
   return (

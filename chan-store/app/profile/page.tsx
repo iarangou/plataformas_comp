@@ -1,7 +1,6 @@
 import { cookies } from 'next/headers';
 import { connectToDB } from '@/lib/db';
 import { User } from '@/models/User';
-import HomeChrome from '@/app/_components/HomeChrome';
 import styles from './styles.module.css';
 import { jwtVerify } from 'jose';
 
@@ -43,7 +42,7 @@ export default async function ProfilePage() {
 
   return (
     <div className={styles.page}>
-      <HomeChrome>
+      
         {/* Header con título y sin buscador */}
         {/* Nota: HomeChrome ya dibuja Header; si quieres este título, duplícalo como prop en HomeChrome */}
         <div className={styles.headerSpacer} />
@@ -86,7 +85,7 @@ export default async function ProfilePage() {
             </div>
           </main>
         </section>
-      </HomeChrome>
+      
     </div>
   );
 }
