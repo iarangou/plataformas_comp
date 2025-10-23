@@ -1,0 +1,203 @@
+/* =========================
+   Variables y layout base
+   ========================= */
+:root{
+  --blue-700:#0d3b66;
+  --page-bg:#1e1e1e;
+  --main-bg:#f5f5f5;
+  --ink:#0f172a;
+  --muted:#d9d9d9;
+
+  /* Carrusel fijo: exactamente 5 visibles */
+  --visible-cards: 5;
+  --card-w: 160px;          /* ancho tarjeta */
+  --card-gap: 16px;         /* separación entre tarjetas */
+  --track-pad: 12px;        /* padding interno de la pista */
+
+  /* Ancho total visible = 5 cards + 4 gaps + 2 paddings */
+  --track-w: calc(
+    var(--visible-cards) * var(--card-w) +
+    (var(--visible-cards) - 1) * var(--card-gap) +
+    2 * var(--track-pad)
+  );
+}
+
+.page { background:var(--page-bg); min-height:100vh; }
+
+/* =========================
+   Header
+   ========================= */
+.header{
+  display:grid;
+  grid-template-columns: 48px 1fr 48px;
+  gap:12px;
+  align-items:center;
+  padding:10px 16px;
+  background:var(--blue-700);
+  position:sticky; top:0; z-index:20;
+}
+.centerGroup{
+  display:flex; align-items:center; justify-content:center;
+  gap:12px;
+  width:100%;
+  max-width: 760px;        /* ancho máximo del bloque central */
+  margin: 0 auto;          /* lo centra en la columna central */
+}
+.iconBtn{
+  height:36px; width:36px; border:none; border-radius:8px;
+  background:transparent; color:#fff; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+}
+.brand{ display:flex; align-items:center; justify-content:center; }
+.logo{ filter:invert(1); }
+.searchWrap{ display:flex; align-items:center; flex:1; }
+.search{
+  width:100%; height:32px; border-radius:6px; border:none; outline:none;
+  padding:0 12px; background:#f1f5f9; color:var(--ink);
+}
+
+/* Botón carrito claro y con badge (no requiere el mismo SVG que el logo) */
+.cartBtn{
+  background:#ffffff; color:var(--ink);
+  border:1px solid #e5e7eb;
+  box-shadow:0 1px 2px rgba(0,0,0,.06);
+  border-radius:10px;
+  position:relative;
+}
+.cartBtnHasItems::after{
+  content:"";
+  position:absolute; top:-2px; right:-2px;
+  width:10px; height:10px; border-radius:999px;
+  background:#ef4444; /* rojo notificación */
+  box-shadow:0 0 0 2px var(--blue-700);
+}
+
+/* Burger (decorativo) */
+.burger, .burger::before, .burger::after{
+  content:''; display:block; width:20px; height:2px; background:#fff; border-radius:2px; position:relative;
+}
+.burger::before{ position:absolute; top:-6px; }
+.burger::after{ position:absolute; top:6px; }
+
+/* =========================
+   Main
+   ========================= */
+.main{
+  background:var(--main-bg);
+  border-top:1px solid var(--muted);
+  padding:10px 12px 32px;
+}
+
+/* =========================
+   Shelf (scroll horizontal con botones)
+   ========================= */
+.shelfSec{ margin:14px 0; }
+
+/* El ancho visible del carrusel queda CENTRADO y CONSTANTE */
+.shelfWrap{
+  position: relative;
+  width: var(--track-w);
+  margin: 0 auto;            /* centra el carrusel en la página */
+}
+
+/* Título de sección */
+.shelfTitle{
+  font-weight:700; font-size:14px; color:var(--ink);
+  margin:8px auto;
+  width: var(--track-w);     /* alinea el título con la pista centrada */
+  border-bottom:1px solid var(--muted);
+  padding-bottom:6px;
+}
+
+/* Pista */
+.shelf{
+  display:grid;
+  grid-auto-flow: column;
+  grid-auto-columns: var(--card-w);
+  gap: var(--card-gap);
+  overflow-x:auto; overflow-y:hidden;
+  padding:8px var(--track-pad) 2px;
+  scroll-snap-type: x proximity;
+
+  /* oculta la expansión lateral y mantiene 5 visibles centrados */
+  width: var(--track-w);
+  margin: 0 auto;
+
+  /* Oculta scrollbar */
+  -ms-overflow-style: none;    /* IE y Edge antiguos */
+  scrollbar-width: none;       /* Firefox */
+}
+
+/* Scrollbar */
+.shelf::-webkit-scrollbar{ display: none; }
+.shelf::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:8px; }
+.shelf{ scrollbar-color:#cbd5e1 transparent; }
+
+/* Botones claros (no azul) */
+.shelfBtn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:36px; height:36px;
+  border:1px solid #e5e7eb;
+  border-radius:9999px;
+  background:#ffffff;
+  color:#0f172a; font-size:20px; line-height:0;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+  cursor:pointer;
+  z-index:5;
+}
+.shelfBtnLeft{ left:4px; }
+.shelfBtnRight{ right:4px; }
+.shelfBtn:disabled{
+  opacity:.35; cursor:default;
+}
+
+/* Oculta botones en pantallas táctiles donde el gesto swipe es natural */
+@media (hover: none) and (pointer: coarse){
+  .shelfBtn{ display:none; }
+}
+
+/* =========================
+   Card
+   ========================= */
+.card{
+  background:#ffffff; border-radius:10px; padding:8px;
+  box-shadow: 0 1px 2px rgba(0,0,0,.06);
+  scroll-snap-align:start;
+}
+.cardThumb{
+  width:100%; height:110px; border-radius:8px; overflow:hidden;
+  background:#e5e7eb; display:flex; align-items:center; justify-content:center;
+}
+.cardPh{ width:100%; height:100%; background:#d9d9d9; }
+.cardImg{ width:100%; height:100%; object-fit:cover; display:block; }
+
+.cardMeta{
+  display:flex; align-items:center; justify-content:space-between;
+  padding-top:6px;
+  font-size:12px; color:#111827;
+}
+.cardName{
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  max-width: calc(var(--card-w) - 56px); /* deja espacio al precio */
+}
+.cardPrice{ color:#111827; font-weight:700; font-size:12px; }
+
+
+
+.addBtn{
+  width:100%; margin-top:6px; height:30px;
+  border:none; border-radius:999px;
+  background:#0ea5e9; /* celeste agradable */
+  color:#fff; font-weight:700; cursor:pointer;
+  box-shadow:0 1px 4px rgba(0,0,0,.15);
+}
+.addBtn:disabled{
+  opacity:.5; cursor:default;
+}
+
+.pageTitle{
+  color:#fff; font-size:22px; font-weight:800; margin:0; text-align:center;
+}

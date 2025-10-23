@@ -1,0 +1,125 @@
+/* Lienzo general */
+.page{
+  min-height:100vh;
+  background:#eff3f6;              /* gris suave del mock */
+  display:flex;
+  flex-direction:column;
+}
+
+/* Columna principal */
+.main{
+  display:flex;
+  flex-direction:column;
+  min-width:0;
+}
+
+/* ====== HEADER ====== */
+.header{
+  height:60px;
+  background:#0d3b66;              /* azul mock */
+  color:#fff;
+  display:grid;
+  grid-template-columns:48px 1fr 48px;   /* btn izq | centro | btn der */
+  align-items:center;
+  padding:0 12px;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+/* botón “hamburger” y carrito */
+.cartBtn{
+  width:36px; height:36px;
+  display:flex; align-items:center; justify-content:center;
+  border:none; background:transparent;
+  color:#fff; cursor:pointer;
+  border-radius:8px;
+  outline:none;
+}
+.cartBtn:focus-visible{
+  box-shadow:0 0 0 2px rgba(255,255,255,.35);   /* focus accesible sin mancha azul */
+}
+.cartBtn > *{ display:block; }                  /* evita saltos de línea con Image */
+
+/* título centrado real sin desplazar por los botones */
+.title{
+  margin:0;
+  font-weight:700;
+  font-size:18px;
+  letter-spacing:.3px;
+  justify-self:center;             /* clave: centra en la celda central del grid */
+  text-align:center;
+}
+
+/* ====== PANEL ====== */
+.panel{
+  background:#fff;
+  width:940px;                      /* ancho constante y un pelín más compacto */
+  max-width:calc(100vw - 48px);
+  margin:24px auto 48px;
+  padding:24px;
+  border-radius:12px;
+  box-shadow:0 8px 22px rgba(13,59,102,.08);
+  min-height:420px;
+}
+
+/* ====== ESTADO VACÍO ====== */
+.empty{
+  height:360px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  color:#9aa4af;
+}
+
+.star{
+  width:64px; height:64px;
+  opacity:.9;
+}
+
+.emptyText{
+  margin:0;
+  font-size:15px;
+  color:#6b7785;
+}
+
+/* ====== LISTA (cuando existan favoritos) ====== */
+.list{
+  list-style:none;
+  margin:0; padding:0;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:16px;
+}
+
+.item{
+  border-bottom:1px solid #eef1f4;
+  padding-bottom:12px;
+}
+
+.cartBtnCart{
+  background:#fff;
+  border:1px solid rgba(13,59,102,.15);
+  border-radius:8px;             /* esquinas redondeadas, no círculo */
+  box-shadow:0 2px 6px rgba(13,59,102,.12);
+  width:40px;
+  height:40px;
+}
+
+.cartBtnCart:hover{
+  box-shadow:0 4px 10px rgba(13,59,102,.18);
+  transform:translateY(-1px);
+}
+
+.cartBtnCart:active{
+  transform:translateY(0);
+  box-shadow:0 2px 6px rgba(13,59,102,.12);
+}
+
+
+/* ====== PEQUEÑOS AJUSTES RESPONSIVE ====== */
+@media (max-width: 1024px){
+  .panel{ width: 92vw; }
+}
