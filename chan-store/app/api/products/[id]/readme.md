@@ -1,0 +1,18 @@
+## Route.js
+- Validación del ID
+  - Se usa mongoose.isValidObjectId(id) para verificar que el parámetro id tenga formato válido de ObjectId.
+  - Si no es válido → 400 "id inválido".
+- GET: Obtiene un producto por su id
+  -  Busca con Product.findById(id).lean()
+  -  Si no existe → 404 "No encontrado".
+  -  Si existe → responde con el documento JSON completo.
+- PATCH: Actualiza parcialmente un producto.
+  - Lee el cuerpo JSON
+  - Limpia el campo name si existe
+  - Llama a findByIdAndUpdat: Devolver el documento actualizado
+  - Si no se encuentra → 404 "No encontrado".
+  - Devuelve el producto actualizado.
+- Delete: Elimina un producto por su id.
+  - Usa findByIdAndDelete(id).lean()
+  - Si no existe → 404 "No encontrado".
+  - Si se elimina → { ok: true }.
