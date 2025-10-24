@@ -1,0 +1,22 @@
+## Route.js
+- Conexión
+  await connectDB() abre la conexión con MongoDB antes de procesar la solicitud.
+- Lectura y validación del body
+  - Extrae name, email, password y confirmPassword con await req.json().
+  - Normaliza el nombre (_name = String(name).trim()) para evitar espacios o tipos erróneos.
+  - Si falta algún campo → 400 "Todos los campos son obligatorios".
+  - Si el nombre no cumple longitud (2–60 caracteres) → 400.
+  - Si password ≠ confirmPassword → 400 "Las contraseñas no coinciden".
+- Verificación de duplicados
+  - User.findOne({ email }) busca si el correo ya existe en la base.
+  - Si existe → 400 "El correo ya está registrado".
+- Registro seguro
+  - bcrypt.hash(password, 10) genera hash con salt de 10 rondas.
+  - Crea el documento: { name: _name, email, passwordHash: hash }.
+- Respuesta
+  - Éxito → 200 { ok: true, message: "Usuario creado", id }.
+  - Error interno → 500 "Error en el registro" y log en servidor.
+-Seguridad
+  - Nunca guarda la contraseña en texto plano.
+  - Valida todos los campos antes de tocar la base.
+  - El hash se guarda bajo passwordHash (coherente con el login).
