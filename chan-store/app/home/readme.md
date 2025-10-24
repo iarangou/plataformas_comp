@@ -30,3 +30,10 @@
 - Lista: .list columna con botones .item; fondo blanco translúcido, hover más claro; .left icono + texto; .sep divisor.
 - Footer: logo filtrado y botón .logout, centrados al final.
 - Iconos CSS: .iHome, .iUser, .iCart, .iStore, .iHelp, .iHeart dibujados con ::before/::after sin SVG.
+## page.tsx
+- Product.find({ isTopSale: true }).limit(20).lean() → top ventas.
+- Product.find({ isSuggested: true }).limit(20).lean() → sugeridos.
+- Product.distinct('category') → obtiene categorías únicas.
+- Para cada categoría: Product.find({ category }).limit(20).lean() → carga hasta 20 productos.
+- Serializa resultados con JSON.parse(JSON.stringify(...)) para evitar errores de Mongoose.
+- Renderiza <Shelf> por cada grupo de productos (TOP SALE, Sugeridos y categorías).
