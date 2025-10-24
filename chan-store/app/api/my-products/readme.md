@@ -1,0 +1,17 @@
+## Route.ts
+- GET: Obtiene la lista de productos del usuario autenticado.
+  - Verifica conexión y usuario → si no hay usuario → 401 Unauthorized.
+  - Lee limit y page de los parámetros de la URL
+  - Realiza dos consultas simultáneas con Promise.all:
+    - Product.find({ userId }) → productos del usuario. (ordenados ascendentemente)
+    - Product.countDocuments({ userId }) → total de registros.
+  - Calcula el número total de páginas
+  - Devuelve JSON con: { data, page, limit, total, pages }
+  - Si algo falla → 500 Server error con el mensaje de error.
+- POST: Crea un nuevo producto para el usuario autenticado.
+  -  Verifica conexión y usuario → si no hay usuario → 401 Unauthorized.
+  -  Lee el cuerpo (req.json()) y extrae name, description, price, stock, etc.
+    -  Si name está vacío → 400 "El nombre es obligatorio".
+  -  Crea el documento (product.create)
+  -  retorna { ok: true, data: { ...doc, _id } } con el producto creado
+  -  Si algo falla → 500 Server error
