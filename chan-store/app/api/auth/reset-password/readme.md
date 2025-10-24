@@ -1,2 +1,22 @@
 ## Route.js
 Endpoint POST que permite restablecer la contraseña de un usuario usando un token temporal previamente emitido por el sistema
+- Conexión
+  - await connectDB() abre la conexión con MongoDB antes de procesar la solicitud.
+  - Se genera un requestId con crypto.randomBytes(6) para identificar cada intento de restablecimiento.
+- Lectura y validación del body
+  - Lee { token, password, confirmPassword } con await req.json().
+  - Si falta el token → 400 "Token requerido".
+  - Si las contraseñas no coinciden → 400 "Las contraseñas no coinciden".
+- Verificación del token
+  - Aplica sha256(token) para comparar con el hash guardado.
+  - Busca el usuario con user.findone
+  - Si no existe o expiró → 400 "Token inválido o expirado".
+  - Genera un nuevo hash
+  - Actualiza los campos (set unset)
+  - Si no se encuentra el usuario al actualizar → 404 "Usuario no encontrado al actualizar".
+- Verificación post-actualización
+  -  Que exista passwordHash o password.
+  -  Si falla → 500 "La nueva contraseña no coincide con el hash guardado".
+- Respuesta
+  - Éxito → 200 { ok: true, message: 'Contraseña actualizada exitosamente', requestId }
+  - Error interno → 500 "Error al restablecer la contraseña" y log detallado en servidor.
