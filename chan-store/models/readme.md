@@ -7,3 +7,10 @@
 - image: opcional, URL o ruta de imagen, vacío por defecto.
 - timestamps: agrega createdAt y updatedAt automáticamente.
 - exportación segura: usa mongoose.models.Product || mongoose.model('Product', ProductSchema) para evitar recompilación en Next.js.
+## products.ts
+- name: requerido (String).
+- price: requerido (Number).
+- image: opcional (String).
+- category: requerido (String, con índice).
+- isTopSale: opcional (Boolean, por defecto false).
+- isSuggested: opcional (Boolean, por defecto false).
