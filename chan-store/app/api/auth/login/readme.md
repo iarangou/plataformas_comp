@@ -1,0 +1,21 @@
+## Route.js
+- Conexión
+  - await connectDB() abre Mongo.
+  - Lee email y password del body (await req.json()), valida requeridos → 400.
+- Búsqueda del usuario
+  - Normaliza email (lower/trim) y hace findOne(...).lean() para obtener un POJO.
+- Obtención del hash
+  - Toma user.passwordHash || user.password por compatibilidad con seeds/ esquemas viejos.
+  - Si no hay hash → 401 (“Usuario sin contraseña registrada”).
+- Verificación
+  - bcrypt.compare(password, hash); si falla → 401 (“Credenciales inválidas”).
+- Emisión de JWT y cookie
+  - signJWT({ id, email }) crea el token.
+  - Responde { ok: true } y agrega Set-Cookie con:
+    - HttpOnly (no accesible desde JS)
+    - SameSite=Lax (mitiga CSRF básico)
+    - Secure en producción
+    - Path=/
+    - Max-Age=604800 (7 días)
+- Errores
+  Cualquier excepción devuelve 500 (“Error en inicio de sesión”) y loguea el error en servidor.
