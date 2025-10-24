@@ -14,3 +14,9 @@
 - category: requerido (String, con índice).
 - isTopSale: opcional (Boolean, por defecto false).
 - isSuggested: opcional (Boolean, por defecto false).
+## user.js
+- name: requerido, texto sin espacios extra (trim), entre 2 y 60 caracteres.
+- email: requerido, único, convertido a minúsculas (lowercase) y sin espacios extra.
+- passwordHash: requerido, hash seguro de la contraseña.
+- resetPasswordTokenHash: opcional, almacena el hash del token temporal usado para restablecer la contraseña.
+- resetPasswordExpires: opcional, fecha de expiración del token de recuperacion
