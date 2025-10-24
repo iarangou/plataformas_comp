@@ -23,3 +23,10 @@
   - .cardThumb: contenedor de imagen (110px alto).
   - .cardMeta: línea inferior con nombre y precio.
   - .addBtn: botón redondeado celeste (#0ea5e9), sombra sutil, texto blanco en negrita.
+## sidebar.module.css
+- Variables: define tonos azul oscuro (--blue-700), azul claro (--blue-500) y texto (--ink).
+- Overlay/Drawer: capa semitransparente (.overlay), panel lateral fijo (.drawer) que se desliza con .drawerOpen.
+- Top: fondo azul oscuro, avatar redondo + nombre (.avatarWrap, .userName).
+- Lista: .list columna con botones .item; fondo blanco translúcido, hover más claro; .left icono + texto; .sep divisor.
+- Footer: logo filtrado y botón .logout, centrados al final.
+- Iconos CSS: .iHome, .iUser, .iCart, .iStore, .iHelp, .iHeart dibujados con ::before/::after sin SVG.
