@@ -20,10 +20,24 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    // ... cualquier otro campo (roles, tokens, etc.)
+
+    // ✅ Campos para recuperación de contraseña
+    resetPasswordTokenHash: {
+      type: String,
+      index: true,     // se usa en el lookup por token
+      select: false,   // no exponer al leer; sigue siendo escribible
+      default: undefined,
+    },
+    resetPasswordExpires: {
+      type: Date,
+      index: true,     // se usa en la condición $gt: now
+      default: undefined,
+    },
   },
   { timestamps: true }
 );
 
-export default models.User || model('User', UserSchema);
+// Índice compuesto útil para la query { tokenHash, expires: { $gt: now } }
+UserSchema.index({ resetPasswordTokenHash: 1, resetPasswordExpires: 1 });
 
+export default models.User || model('User', UserSchema);

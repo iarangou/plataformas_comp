@@ -14,6 +14,7 @@ export default function TokenForm({ token }: { token: string }) {
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
+
     if (password.length < 6) {
       setError('La contraseña debe tener al menos 6 caracteres');
       return;
@@ -22,21 +23,29 @@ export default function TokenForm({ token }: { token: string }) {
       setError('Las contraseñas no coinciden');
       return;
     }
-    setLoading(true);
-    const res = await fetch('/api/auth/reset-password', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token, password })
-    });
-    setLoading(false);
 
-    if (!res.ok) {
+    setLoading(true);
+    try {
+      const res = await fetch('/api/auth/reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        // Enviamos token + password + confirmPassword para cubrir tu API actual
+        body: JSON.stringify({ token, password, confirmPassword: confirm }),
+      });
+
       const data = await res.json().catch(() => ({}));
-      setError(data?.error || 'No se pudo restablecer la contraseña');
-      return;
+      if (!res.ok) {
+        setError(data?.message || data?.error || 'No se pudo restablecer la contraseña');
+        return;
+      }
+
+      // Éxito: ir al login
+      router.push('/login');
+    } catch {
+      setError('Error de red');
+    } finally {
+      setLoading(false);
     }
-    // Éxito: enviar a login
-    router.push('/login');
   }
 
   return (
@@ -63,7 +72,7 @@ export default function TokenForm({ token }: { token: string }) {
         required
       />
 
-      {error && <p style={{ color: '#b91c1c', fontSize: 13 }}>{error}</p>}
+      {error && <p style={{ color: '#b91c1c', fontSize: 13, marginTop: 8 }}>{error}</p>}
 
       <button className={styles.button} type="submit" disabled={loading}>
         {loading ? 'Guardando…' : 'Restablecer'}
@@ -71,4 +80,3 @@ export default function TokenForm({ token }: { token: string }) {
     </form>
   );
 }
-

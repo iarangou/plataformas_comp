@@ -1,8 +1,8 @@
+// app/api/auth/login/route.js
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { connectDB } from '../../../../lib/mongodb.js';
 import User from '../../../../models/User.js';
-// CAMBIO 1 → usar signJWT desde lib/auth.js
 import { signJWT } from '../../../../lib/auth.js';
 
 export const runtime = 'nodejs';
@@ -21,15 +21,19 @@ export async function POST(req) {
       return NextResponse.json({ error: 'Credenciales inválidas' }, { status: 401 });
     }
 
-    const ok = await bcrypt.compare(password, user.passwordHash);
+    // Soporta passwordHash o password (por si el esquema/seed usa uno u otro)
+    const hash = user.passwordHash || user.password;
+    if (!hash) {
+      return NextResponse.json({ error: 'Usuario sin contraseña registrada' }, { status: 401 });
+    }
+
+    const ok = await bcrypt.compare(password, hash);
     if (!ok) {
       return NextResponse.json({ error: 'Credenciales inválidas' }, { status: 401 });
     }
 
-    // CAMBIO 2 → firmar JWT compatible con verifyJWT (usa id y email)
     const token = signJWT({ id: String(user._id), email: user.email });
 
-    // CAMBIO 3 → cookie llamada 'token' en lugar de 'session'
     const res = NextResponse.json({ ok: true });
     res.headers.set(
       'Set-Cookie',
