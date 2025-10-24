@@ -1,0 +1,18 @@
+## Route.js
+- GET: Lista productos con filtros, búsqueda y paginación
+  - Lee parámetros del query (page, limit, q, category, sort) desde req.url.
+  - Construye un filtro dinámico:
+    - Si q existe → busca coincidencias en name ($regex, case-insensitive).
+    - Si category existe → filtra por categoría exacta.
+  - Calcula paginas
+  - Product.find(filter).sort(sort).skip(skip).limit(limit).lean() — obtiene productos.
+  - Product.countDocuments(filter) — total para paginación.
+  - Retorna { data, page, limit, total, pages } con estado 200.
+  - devuelve lista vacía si no hay coincidencias.
+- POST: Crea un nuevo producto.
+  - Lee el body (await req.json()) y valida name y price
+  - normaliza y completa valores
+  - Product.create({...}) — inserta el documento.
+  - Exito → 201 Created con el producto en JSON.
+  - 400 → campos inválidos o faltantes (name, price).
+  - 500 → error interno al crear (se loguea en servidor).
