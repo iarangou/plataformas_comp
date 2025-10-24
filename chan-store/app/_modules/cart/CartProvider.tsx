@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useMemo, useReducer } from 'react';
 import type { CartItem, AddToCartInput, CartActions, CartSelectors } from './cart.types';
+export type { CartItem };
 
 type State = { items: CartItem[]; open: boolean };
 type Action =

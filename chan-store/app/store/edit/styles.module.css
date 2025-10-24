@@ -1,0 +1,38 @@
+/* app/store/edit/styles.module.css */
+.page{ background:#fff; min-height:100vh; display:flex; flex-direction:column; }
+.headerSpacer{ height:56px; }
+.main{ flex:1; display:grid; place-items:flex-start center; padding:24px 16px; }
+
+.panel{
+  width:100%; max-width:980px;
+  background:#fff; border-radius:14px; 
+  box-shadow:0 6px 24px rgba(0,0,0,.08);
+  padding:24px;
+}
+
+.title{ color:#0d3b66; font-weight:700; font-size:22px; margin-bottom:16px; }
+
+.form{ display:flex; flex-direction:column; gap:10px; }
+.label{ font-size:12px; font-weight:700; color:#1b1b1b; }
+.input, .textarea{
+  width:100%;
+  border:2px solid #9ec5fe;
+  background:#e7f0ff;
+  border-radius:6px;
+  padding:10px 12px;
+  outline:none;
+}
+.input:focus, .textarea:focus{ border-color:#2f7dff; background:#fff; }
+
+.actions{ display:flex; justify-content:flex-end; margin-top:12px; }
+.button{
+  min-width:180px;
+  padding:10px 14px;
+  border:none; border-radius:8px;
+  background:#2f7dff; color:#fff; font-weight:700; cursor:pointer;
+}
+.button:disabled{ opacity:.7; cursor:default; }
+
+.muted{ color:#666; }
+.error{ color:#b00020; font-weight:600; }
+.ok{ color:#0a7a2f; font-weight:600; }

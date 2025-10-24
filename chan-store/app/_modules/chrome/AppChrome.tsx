@@ -18,6 +18,13 @@ function InnerChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const isProfile = pathname === '/profile';
   const isFavorites = pathname === '/favorites';
+  const isHelp = pathname == '/help';
+  const isStore = pathname == '/store';
+  const isStoreEdit  = pathname == '/store/edit';
+  const isProductsList = pathname.startsWith('/product') && pathname === '/product';
+  const isProductNew   = pathname.startsWith('/product/new');
+  const isProductEdit  = pathname.startsWith('/product/') && !isProductNew;
+  const isQuestState  = pathname == '/questState';
 
   useBodyScrollLock(openLeft || open);
 
@@ -27,8 +34,19 @@ function InnerChrome({ children }: { children: React.ReactNode }) {
         cartCount={count}
         onOpenMenu={() => setOpenLeft(true)}
         onOpenCart={openCart}
-        title={isProfile ? 'Mi Perfil' : isFavorites ? 'Favoritos' : undefined}
-        showSearch={!(isProfile || isFavorites)}
+        title={
+          isProfile ? 'Mi Perfil' : 
+          isFavorites ? 'Favoritos' : 
+          isHelp ? 'Preguntas Frecuentes' :
+          isStoreEdit   ? 'Perfil Tienda' :  
+          isStore ? 'Mi tienda':
+          isProductsList ? 'Mis productos' :
+          isProductNew   ? 'Nuevo producto' :
+          isProductEdit  ? 'Editar producto' :
+          isQuestState ? 'Pedidos Recientes' : 
+          undefined
+        }
+        showSearch={!(isQuestState || isProfile || isFavorites || isStore || isStoreEdit || isHelp || isProductsList || isProductNew || isProductEdit)}
       />
 
       <LeftSidebar open={openLeft} onClose={() => setOpenLeft(false)} />

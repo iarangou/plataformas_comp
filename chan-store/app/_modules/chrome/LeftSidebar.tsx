@@ -38,7 +38,7 @@ export default function LeftSidebar({
   const routes: Record<string, string> = {
   home: '/home',
   profile: '/profile',
-  orders: '/orders',
+  orders: '/questState',
   store: '/store',
   help: '/help',
   favs: '/favorites',

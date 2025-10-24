@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styles from './cart.module.css';
 import { formatCOP } from '@/lib/currency';
 import type { CartItem } from './cart.types';
+export type { CartItem };
 
 type CartDrawerProps = {
   open: boolean;

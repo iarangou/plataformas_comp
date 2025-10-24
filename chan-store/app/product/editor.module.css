@@ -1,0 +1,99 @@
+/* Contenedor principal: dos columnas */
+.form{
+  width:100%;
+  max-width:980px;
+  margin:0 auto;
+  padding:24px;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 6px 24px rgba(0,0,0,.08);
+  display:grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap:28px;
+}
+
+/* IZQUIERDA */
+.left{ display:flex; align-items:flex-start; justify-content:center; }
+.imageBox{
+  width:100%;
+  max-width:520px;
+  aspect-ratio: 1 / 1;           /* cuadrado */
+  border:3px solid #79a9ff;      /* borde azul */
+  border-radius:10px;
+  background:#f1f6ff;            /* relleno claro */
+  display:grid; place-items:center;
+}
+.placeholder{
+  width:85%; height:85%;
+  background:#d9d9d9; border-radius:10px;
+}
+.preview{ width:100%; height:100%; object-fit:cover; border-radius:6px; }
+
+/* DERECHA */
+.right{ display:flex; flex-direction:column; gap:12px; padding-top:6px; }
+
+/* Grupo de campo */
+.field{ display:flex; flex-direction:column; gap:6px; }
+
+/* Etiqueta pequeña (subtítulo) */
+.smallLabel{
+  font-size:11px; font-weight:700; color:#1a1a1a;
+}
+
+/* Casilla de NOMBRE: blanca con borde azul */
+.nameInput{
+  width:100%;
+  border:2px solid #9ec5fe;
+  background:#fff;
+  border-radius:6px;
+  padding:10px 12px;
+  outline:none;
+}
+.nameInput:focus{ border-color:#2f7dff; }
+
+/* Casillas azules (Descripción / Imagen URL) */
+.blueInput{
+  width:100%;
+  border:2px solid #9ec5fe;
+  background:#e0edff;
+  border-radius:6px;
+  padding:10px 12px;
+  outline:none;
+}
+.blueInput:focus{ background:#fff; border-color:#2f7dff; }
+
+/* Líneas de precio / unidades */
+.linesGroup{ margin-top:4px; gap:12px; }
+.lineField{ display:flex; align-items:center; gap:10px; }
+.lineLabel{ font-size:12px; font-weight:700; color:#1a1a1a; white-space:nowrap; }
+.lineInput{
+  flex:1;
+  border:none;
+  border-bottom:2px dashed #bfbfbf;
+  padding:6px 4px 4px;
+  outline:none;
+  background:transparent;
+  font-size:14px;
+}
+.lineInput:focus{ border-bottom-color:#2f7dff; }
+
+/* CTA */
+.cta{
+  align-self:flex-start;
+  margin-top:8px;
+  padding:10px 16px;
+  border:none; border-radius:8px;
+  background:#2f7dff; color:#fff;
+  font-weight:700; cursor:pointer;
+}
+.cta:disabled{ opacity:.7; cursor:default; }
+
+/* Mensajes */
+.error{ color:#b00020; font-weight:600; }
+
+/* Responsive */
+@media (max-width: 900px){
+  .form{ grid-template-columns: 1fr; }
+  .left{ order:1; }
+  .right{ order:2; }
+}

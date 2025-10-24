@@ -1,0 +1,105 @@
+.page {
+  min-height: 100vh;
+  background: #ffffff; /* fondo limpio como el mock */
+}
+
+.headerSpacer {
+  height: 72px; /* compensa el header sticky (ajusta si tu Header es más alto) */
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 12px 32px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* CARD */
+.card {
+  background: #d7eaff; /* azul claro tipo mock */
+  border-radius: 10px;
+  overflow: hidden; /* para que el botón inferior quede integrado */
+  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  border: 1px solid #c2dcff;
+}
+
+.cardBody {
+  padding: 12px;
+}
+
+.rowTop {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.labelStrong {
+  font-weight: 700;
+  font-size: 14px;
+  color: #0a0a0a;
+}
+
+.right {
+  justify-self: end;
+}
+
+.rowMiddle {
+  display: grid;
+  grid-template-columns: 64px 1fr 160px;
+  gap: 12px;
+  align-items: center;
+}
+
+.thumb {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  background: #eef3f9; /* placeholder de la miniatura */
+  border: 1px dashed #c7d3e6;
+}
+
+.nameWrap {
+  display: flex;
+  align-items: center;
+  height: 64px;
+}
+
+.priceQty {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  height: 64px;
+  text-align: right;
+}
+
+.smallMuted {
+  font-size: 12px;
+  color: #ffffff; /* gris oscuro legible */
+}
+
+/* Botón inferior estilo barra */
+.detailsBtn {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #1b5ea9; /* azul del mock */
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.detailsBtn:hover {
+  filter: brightness(1.05);
+}
+
+
+

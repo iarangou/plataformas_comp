@@ -1,7 +1,7 @@
 // app/layout.tsx
 import './globals.css';
 import type { Metadata } from 'next';
-import AppChrome from './_modules/chrome/AppChorme';
+import AppChrome from './_modules/chrome/AppChrome';
 
 
 export const metadata: Metadata = {
