@@ -16,3 +16,9 @@
   - .faqAnswer → bloque con fondo blanco semitransparente, padding 10 px, bordes redondeados (8 px), texto 14 px (15 px en ≥768 px).
 - Responsive
   -  ≥768 px → incrementa tipografía (.title 24 px, .faqAnswer 15 px) y padding interno de .card.
+## page.tsx
+Define faqs: lista { q, a }.
+- .page → layout general (fondo claro, columna).
+- .headerSpacer → compensa el header fijo.
+- .main → padding general.
+- .card → panel blanco con sombra.
