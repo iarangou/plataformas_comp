@@ -1,0 +1,25 @@
+## styles.module.css
+- Variables
+  - Define paleta base y medidas del carrusel
+  - Usa cálculo de --track-w para mantener exactamente 5 tarjetas visibles con spacing uniforme.
+- Layout
+  -  .page: fondo oscuro global.
+  -  .main: fondo claro, padding y borde superior.
+- Header
+  - .header: grid 3 columnas (botón izq, centro, carrito der), fondo azul fijo (sticky top:0).
+  - .iconBtn: botón cuadrado blanco/transparente.
+  - .centerGroup: centra el logo + buscador con ancho máximo (760px).
+  - .cartBtn: botón claro con borde y sombra, incluye badge rojo si hay ítems (.cartBtnHasItems::after).
+  - .burger: icono hamburguesa con pseudo-elementos.
+  - .search: input simple con padding y fondo gris claro.
+  - .pageTitle: título blanco grande, centrado.
+- Estanteria
+  - .shelfSec, .shelfWrap: bloque centrado con ancho fijo --track-w.
+  - .shelfTitle: título alineado al carrusel.
+  - .shelf: grid horizontal con scroll-snap; oculta scrollbar, muestra solo 5 tarjetas centradas.
+  - .shelfBtn: botones flotantes (izq/der) blancos con sombra suave; ocultos en pantallas táctiles.
+- Card
+  - .card: fondo blanco, sombra ligera, border-radius 10px.
+  - .cardThumb: contenedor de imagen (110px alto).
+  - .cardMeta: línea inferior con nombre y precio.
+  - .addBtn: botón redondeado celeste (#0ea5e9), sombra sutil, texto blanco en negrita.
