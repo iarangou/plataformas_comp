@@ -14,3 +14,8 @@
   - .cartBtnCart → botón blanco (40 px) con borde, sombra sutil y efecto hover/active.
 - Responsive
   ≤1024px → .panel ajusta ancho a 92vw.
+## Page.tsx
+Renderiza la vista de Favoritos del usuario. Muestra los productos marcados o, si no hay ninguno, un mensaje vacío con ícono.
+- Declara el componente cliente ('use client')
+- Importa estilos desde styles.module.css.
+- Define favorites (por ahora arreglo vacío, se conectará luego a datos reales).
