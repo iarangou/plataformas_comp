@@ -20,3 +20,14 @@
 - passwordHash: requerido, hash seguro de la contraseña.
 - resetPasswordTokenHash: opcional, almacena el hash del token temporal usado para restablecer la contraseña.
 - resetPasswordExpires: opcional, fecha de expiración del token de recuperacion
+## user.ts
+- _id (opcional)
+- name (string, requerido)
+- email (string, requerido, único)
+- phone (string, opcional)
+- address (string, opcional)
+- avatarUrl (string, opcional)
+  
+- name: requerido.
+- email: requerido, único e indexado.
+- phone, address, avatarUrl: opcionales.
