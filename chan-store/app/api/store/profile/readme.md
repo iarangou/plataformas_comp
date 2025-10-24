@@ -1,1 +1,23 @@
 ## Route.ts
+- GetUserIDFromCookies:
+  - Usa cookies() para leer el token JWT almacenado en las cookies.
+  - Si no existe o es inválido → 401 Unauthorized.
+  - jwtVerify(token, secret) decodifica el JWT y extrae el id del usuario (id, _id o sub)
+  - Si la verificación falla, devuelve null.
+- GET
+  - Obtiene el userId desde las cookies.
+  - Si no hay usuario → 401 Unauthorized.
+  - Store.findOne({ userId }).lean<StoreLean>() busca la tienda del usuario.
+  - Retorna { store } si existe, o { store: null } si no hay registro.
+  - exito -> 200 { store }
+  - Error interno → 500
+- POST: Crea o actualiza el perfil de tienda del usuario autenticado.
+  -  Obtiene userId del JWT.
+  -  Lee name y description del req.json(), los limpia con .trim().
+  -  Valida longitud de name (Si no cumple → 400 "El nombre debe tener entre 2 y 60 caracteres".)
+  -  findOneAndUpdate: Crea o actualiza la tienda del usuario.
+  -  Vuelve a leer el documento actualizado con .lean<StoreLean>().
+  -  Devuelve { ok: true, store: updated }.
+  -  exito -> 200
+  -  Error interno → 500
+  -  validacion -> 400
